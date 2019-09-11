@@ -1,0 +1,28 @@
+
+h1 {
+    text-align: center;
+    font-size: 3em;
+}
+
+table, td {
+    border: 2px solid black;
+}
+
+.container {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+table {
+    margin: 0 auto; /* or margin: 0 auto 0 auto */
+}
+
+td{
+    text-align: center;
+    width: 3em;
+    height: 3em;
+    color: red;
+    font-weight: bolder;
+    font-size: 2em;
+}
