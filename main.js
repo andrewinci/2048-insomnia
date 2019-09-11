@@ -9,7 +9,7 @@ class Table {
         this.build_matrix();
     }
 
-    build_matrix(){
+    build_matrix() {
         for (let r = 0; r < this.size; r++) {
             this.matrix[r] = [];
         }
@@ -36,10 +36,42 @@ class Table {
         this.matrix[row][col] = value;
     }
 
+    get_empty_cells() {
+        let empty_cells = [];
+        for (let r = 0; r < this.size; r++)
+            for (let c = 0; c < this.size; c++)
+                if (this.get_value(r, c) == null)
+                    empty_cells.push([r, c]);
+        return empty_cells;
+    }
+
     check_row_col(row, col) {
         if (row == null || row < 0 || row > this.size) throw 'Invalid row';
         if (col == null || col < 0 || col > this.size) throw 'Invalid col';
     }
 }
 
+function random_val(list){
+    let val = Math.floor(Math.random()*list.length);
+    return list[val];
+}
+
+class Game {
+    constructor(table) {
+        this.table = table;
+        this.size = table.size;
+        // possible values for a new tale
+        this.new_tale_values = [2, 4];
+    }
+
+    add_random_tale() {
+        let empty_cells = this.table.get_empty_cells();
+        if (empty_cells.length === 0) throw 'No empty cell availables'
+        let cell = random_val(empty_cells);
+        let val = random_val(this.new_tale_values);
+        this.table.set_value(cell[0], cell[1], val);
+    }
+}
+
 let table = new Table(document.getElementById('table'), 5);
+let game = new Game(table);
