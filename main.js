@@ -51,8 +51,8 @@ class Table {
     }
 }
 
-function random_val(list){
-    let val = Math.floor(Math.random()*list.length);
+function random_val(list) {
+    let val = Math.floor(Math.random() * list.length);
     return list[val];
 }
 
@@ -71,7 +71,98 @@ class Game {
         let val = random_val(this.new_tale_values);
         this.table.set_value(cell[0], cell[1], val);
     }
+
+    push_right() {
+        let push_right_row = function (table, r) {
+            let i = table.size - 1;
+            while (i >= 0 && table.get_value(r, i) != null) i--;
+            if (i == 0) return;
+            for (let c = i; c >= 0; c--) {
+                let current_value = table.get_value(r, c);
+                if (current_value == null) continue;
+                table.set_value(r, i, current_value);
+                i--;
+                table.set_value(r, c, null);
+            }
+        }
+
+        for (let r = 0; r < this.table.size; r++)
+            push_right_row(this.table, r);
+    }
+
+    push_down() {
+        let push_down_col = function (table, c) {
+            let i = table.size - 1;
+            while (i >= 0 && table.get_value(i, c) != null) i--;
+            if (i == 0) return;
+            for (let r = i; r >= 0; r--) {
+                let current_value = table.get_value(r, c);
+                if (current_value == null) continue;
+                table.set_value(i, c, current_value);
+                i--;
+                table.set_value(r, c, null);
+            }
+        }
+
+        for (let c = 0; c < this.table.size; c++)
+            push_down_col(this.table, c);
+    }
+
+    push_left() {
+        let push_left_row = function (table, r) {
+            let i = 0;
+            while (i<table.size && table.get_value(r, i) != null) i++;
+            for (let c = i; c < table.size; c++) {
+                let current_value = table.get_value(r, c);
+                if (current_value == null) continue;
+                table.set_value(r, i, current_value);
+                i++;
+                table.set_value(r, c, null);
+            }
+        }
+
+        for (let r = 0; r < this.table.size; r++)
+            push_left_row(this.table, r);
+    }
+
+    push_top() {
+        let push_top_col = function (table, c) {
+            let i = 0;
+            //todo: fix for i<0
+            while (i<table.size && table.get_value(i, c) != null) i++;
+            for (let r = i; r < table.size; r++) {
+                let current_value = table.get_value(r, c);
+                if (current_value == null) continue;
+                table.set_value(i, c, current_value);
+                i++;
+                table.set_value(r, c, null);
+            }
+        }
+
+        for (let c = 0; c < this.table.size; c++)
+            push_top_col(this.table, c);
+    }
 }
 
 let table = new Table(document.getElementById('table'), 5);
 let game = new Game(table);
+
+document.addEventListener('keydown', function (event) {
+    switch (event.key) {
+        case "ArrowLeft":
+            game.push_left();
+            break;
+        case "ArrowRight":
+            game.push_right();
+            break;
+        case "ArrowUp":
+            game.push_top();
+            break;
+        case "ArrowDown":
+            game.push_down();
+            break;
+        case " ":
+            game.add_random_tale();
+            break;
+    }
+});
