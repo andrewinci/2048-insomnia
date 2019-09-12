@@ -32,7 +32,9 @@ class Table {
 
     set_value(row, col, value) {
         this.check_row_col(row, col);
-        this.table.rows[row].cells[col].innerText = value;
+        let cell = this.table.rows[row].cells[col]
+        cell.innerText = value;
+        cell.setAttribute('class', 'cell'+value);
         this.matrix[row][col] = value;
     }
 

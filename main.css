@@ -1,11 +1,14 @@
-
+body{
+    font-family: sans-serif;
+}
 h1 {
     text-align: center;
     font-size: 3em;
 }
 
 table, td {
-    border: 2px solid black;
+    /*border: 2px solid black;*/
+    border-radius: 5px;
 }
 
 .container {
@@ -16,6 +19,8 @@ table, td {
 
 table {
     margin: 0 auto; /* or margin: 0 auto 0 auto */
+    background: #baab9c;
+    border-spacing: 0.8em;
 }
 
 td{
@@ -23,6 +28,12 @@ td{
     width: 3em;
     height: 3em;
     color: red;
+    background: #d9c7b6;
     font-weight: bolder;
     font-size: 2em;
+}
+
+.cell2, .cell4{
+    color:rgb(116, 110, 103);
+    background: rgb(235, 228, 220);
 }
