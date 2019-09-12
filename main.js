@@ -74,53 +74,57 @@ class Game {
         this.table.set_value(cell[0], cell[1], val);
     }
 
-    push_right() {
-        let push_right_row = function (table, r) {
-            let i = table.size - 1;
-            while (i >= 0 && table.get_value(r, i) != null) i--;
-            if (i == 0) return;
-            for (let c = i; c >= 0; c--) {
-                let current_value = table.get_value(r, c);
-                if (current_value == null) continue;
-                table.set_value(r, i, current_value);
-                i--;
-                table.set_value(r, c, null);
-            }
-        }
-
-        for (let r = 0; r < this.table.size; r++)
-            push_right_row(this.table, r);
-    }
-
     push_down() {
         let push_down_col = function (table, c) {
-            let i = table.size - 1;
-            while (i >= 0 && table.get_value(i, c) != null) i--;
-            if (i == 0) return;
-            for (let r = i; r >= 0; r--) {
-                let current_value = table.get_value(r, c);
-                if (current_value == null) continue;
-                table.set_value(i, c, current_value);
-                i--;
-                table.set_value(r, c, null);
+            let tiles = [];
+            for(let i=table.size - 1; i>=0; i--){
+                let val = table.get_value(i, c);
+                table.set_value(i, c, null);
+                if( val == null) continue;
+                if ( tiles.length && tiles[tiles.length - 1] == val )
+                    tiles[tiles.length - 1 ] = 2*val;
+                else tiles.push(val);
             }
+            for(let i=0; i<tiles.length; i++)
+                table.set_value(table.size -1 - i, c, tiles[i]);
         }
 
         for (let c = 0; c < this.table.size; c++)
             push_down_col(this.table, c);
     }
 
+    push_right() {
+        let push_right_row = function (table, r) {
+            let tiles = [];
+            for(let i=table.size - 1; i>=0; i--){
+                let val = table.get_value(r, i);
+                table.set_value(r, i, null);
+                if( val == null) continue;
+                if ( tiles.length && tiles[tiles.length - 1] == val )
+                    tiles[tiles.length - 1 ] = 2*val;
+                else tiles.push(val);
+            }
+            for(let i=0; i<tiles.length; i++)
+                table.set_value(r, table.size -1 - i, tiles[i]);
+        }
+
+        for (let r = 0; r < this.table.size; r++)
+            push_right_row(this.table, r);
+    }
+
     push_left() {
         let push_left_row = function (table, r) {
-            let i = 0;
-            while (i<table.size && table.get_value(r, i) != null) i++;
-            for (let c = i; c < table.size; c++) {
-                let current_value = table.get_value(r, c);
-                if (current_value == null) continue;
-                table.set_value(r, i, current_value);
-                i++;
-                table.set_value(r, c, null);
+            let tiles = [];
+            for(let i=0; i<=table.size - 1; i++){
+                let val = table.get_value(r, i);
+                table.set_value(r, i, null);
+                if( val == null) continue;
+                if ( tiles.length && tiles[tiles.length - 1] == val )
+                    tiles[tiles.length - 1 ] = 2*val;
+                else tiles.push(val);
             }
+            for(let i=tiles.length - 1; i>=0; i--)
+                table.set_value(r, i, tiles[i]);
         }
 
         for (let r = 0; r < this.table.size; r++)
@@ -129,16 +133,17 @@ class Game {
 
     push_top() {
         let push_top_col = function (table, c) {
-            let i = 0;
-            //todo: fix for i<0
-            while (i<table.size && table.get_value(i, c) != null) i++;
-            for (let r = i; r < table.size; r++) {
-                let current_value = table.get_value(r, c);
-                if (current_value == null) continue;
-                table.set_value(i, c, current_value);
-                i++;
-                table.set_value(r, c, null);
+            let tiles = [];
+            for(let i=0; i<=table.size - 1; i++){
+                let val = table.get_value(i, c);
+                table.set_value(i, c, null);
+                if( val == null) continue;
+                if ( tiles.length && tiles[tiles.length - 1] == val )
+                    tiles[tiles.length - 1 ] = 2*val;
+                else tiles.push(val);
             }
+            for(let i=tiles.length - 1; i>=0; i--)
+                table.set_value(i, c, tiles[i]);
         }
 
         for (let c = 0; c < this.table.size; c++)
