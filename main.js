@@ -34,8 +34,11 @@ class Table {
         this.check_row_col(row, col);
         let cell = this.table.rows[row].cells[col]
         cell.innerText = value;
-        cell.setAttribute('class', 'cell'+value);
         this.matrix[row][col] = value;
+        if (value !== 0 && value != null)
+            cell.setAttribute('class', 'cell cell'+value);
+        else cell.setAttribute('class', '');
+        
     }
 
     get_empty_cells() {
@@ -158,28 +161,16 @@ game.add_random_tale();
 
 document.addEventListener('keydown', function (event) {
     switch (event.key) {
-        case "ArrowLeft":
-        case "a":
-        case "A":
-            game.push_left();
-            break;
-        case "ArrowRight":
-        case "d":
-        case "D":
-            game.push_right();
-            break;
-        case "ArrowUp":
-        case "w":
-        case "W":
-            game.push_top();
-            break;
-        case "ArrowDown":
-        case "s":
-        case "S":
-            game.push_down();
-            break;
-        default:
-            return
+        case "ArrowLeft": case "a": case "A":
+            game.push_left(); break;
+        case "ArrowRight": case "d": case "D":
+            game.push_right(); break;
+        case "ArrowUp": case "w": case "W":
+            game.push_top(); break;
+        case "ArrowDown": case "s": case "S":
+            game.push_down(); break;
+        default: 
+            return;
     }
     game.add_random_tale();
 });

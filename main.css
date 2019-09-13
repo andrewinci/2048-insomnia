@@ -1,9 +1,11 @@
 body{
     font-family: sans-serif;
 }
+
 h1 {
     text-align: center;
     font-size: 3em;
+    color: rgb(63, 63, 63);
 }
 
 table, td {
@@ -22,6 +24,18 @@ table {
     border-spacing: 0.8em;
 }
 
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes opacity_animation {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+  
+  /* Standard syntax */
+  @keyframes opacity_animation {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+
 td{
     text-align: center;
     width: 3em;
@@ -32,6 +46,13 @@ td{
     background: #d9c7b6;
     font-weight: bolder;
     font-size: 2em;
+}
+
+.cell{
+    -webkit-animation-name: opacity_animation; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+    animation-name: opacity_animation;
+    animation-duration: 0.2s;
 }
 
 .cell2{
@@ -53,3 +74,5 @@ td{
 .cell512  { background: rgb(255, 223, 79 );	 }
 .cell1024 { background: rgb(255, 201, 85 );	 }
 .cell2048 { background: rgb(255, 191, 0  );	 }
+
+
