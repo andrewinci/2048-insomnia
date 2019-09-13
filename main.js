@@ -153,23 +153,33 @@ class Game {
 
 let table = new Table(document.getElementById('table'), 5);
 let game = new Game(table);
+game.add_random_tale();
+game.add_random_tale();
 
 document.addEventListener('keydown', function (event) {
     switch (event.key) {
         case "ArrowLeft":
+        case "a":
+        case "A":
             game.push_left();
             break;
         case "ArrowRight":
+        case "d":
+        case "D":
             game.push_right();
             break;
         case "ArrowUp":
+        case "w":
+        case "W":
             game.push_top();
             break;
         case "ArrowDown":
+        case "s":
+        case "S":
             game.push_down();
             break;
-        case " ":
-            game.add_random_tale();
-            break;
+        default:
+            return
     }
+    game.add_random_tale();
 });

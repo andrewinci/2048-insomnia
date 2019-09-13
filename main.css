@@ -7,7 +7,6 @@ h1 {
 }
 
 table, td {
-    /*border: 2px solid black;*/
     border-radius: 5px;
 }
 
@@ -18,7 +17,7 @@ table, td {
 }
 
 table {
-    margin: 0 auto; /* or margin: 0 auto 0 auto */
+    margin: 0 auto;
     background: #baab9c;
     border-spacing: 0.8em;
 }
@@ -27,13 +26,30 @@ td{
     text-align: center;
     width: 3em;
     height: 3em;
-    color: red;
+    color:white;
+    text-shadow: 1px 1px gray;
+    box-shadow: 1px 1px gray;
     background: #d9c7b6;
     font-weight: bolder;
     font-size: 2em;
 }
 
-.cell2, .cell4{
+.cell2{
     color:rgb(116, 110, 103);
     background: rgb(235, 228, 220);
 }
+
+.cell4{
+    color:rgb(116, 110, 103);
+    background: rgb(233, 222, 200);
+}
+
+.cell8    { background: rgb(225, 179, 135);  }
+.cell16   { background: rgb(201, 159, 120);  }
+.cell32   { background: rgb(211, 141, 118);  }
+.cell64   { background: rgb(213, 113, 85 );  }
+.cell128  { background: rgb(229, 204, 132);	 }
+.cell256  { background: rgb(255, 221, 118);	 }
+.cell512  { background: rgb(255, 223, 79 );	 }
+.cell1024 { background: rgb(255, 201, 85 );	 }
+.cell2048 { background: rgb(255, 191, 0  );	 }
