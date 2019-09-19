@@ -1,5 +1,6 @@
 body{
     font-family: sans-serif;
+    background: rgba(231, 225, 220, 0.84);
 }
 
 h1 {
@@ -22,6 +23,7 @@ table {
     margin: 0 auto;
     background: #baab9c;
     border-spacing: 0.8em;
+    box-shadow: 1px 1px gray;
 }
 
 /* Safari 4.0 - 8.0 */
